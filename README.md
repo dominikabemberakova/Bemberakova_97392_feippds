@@ -31,3 +31,49 @@ The bakery algorithm is a correct solution to the mutual exclusion problem becau
 The algorithm works by assigning a unique number to each thread that wants access to the critical section. Each thread then compares its number with the numbers of other threads that have requested access. The thread with the lowest number is granted access to the critical section, while the other threads must wait their turn. This ensures that threads enter the critical section in a predetermined order and that each thread will eventually gain access.
 
 Overall, the bakery algorithm is a fair and efficient solution to the mutual exclusion problem, making it a popular choice for implementing critical sections in multi-threaded programs.
+
+## Identical parts
+I used the algorithm that was shown to us in the exercise and also in the lecture.
+![Algorithm](images/algorithm.png "Bakery algorithm")
+
+**Bakery algorithm:**
+The code consists of a function bakery_algorithm(tid), which takes a thread ID (tid) as an input and executes the bakery algorithm to enter the critical section. The algorithm is based on a distributed system of processes (threads), where each process gets a unique number assigned to it based on its arrival time. The algorithm ensures that the process with the lowest number gets access to the critical section first.
+
+```python
+def bakery_algorithm(tid: int):
+    global choose, number
+
+    # assign order to process
+    choose[tid] = True
+    number[tid] = max(number) + 1
+    choose[tid] = False
+
+    # wait for other processes to release the critical section
+    for j in range(NUM_THREADS):
+        # skip current process
+        if j == tid:
+            continue
+        # wait for processes currently deciding on entering the critical section
+        while choose[j]:
+            pass
+        # wait until process with lower number has finished
+        while (number[j] != 0) and ((number[j], j) < (number[tid], tid)):
+            pass
+
+```
+
+The algorithm uses two shared data structures: choose and number. The choose list is used to indicate whether a process is interested in entering the critical section, and the number list is used to store the unique numbers assigned to each process. The algorithm works as follows:
+
+1. A process announces its interest in entering the critical section by setting its choose value to True and assigns itself a unique number that is one more than the maximum value in the number array.
+
+2. The process then waits for all other processes to release the critical section by going through a loop for each process.
+
+3. For each process, the algorithm checks if it has a lower number and is not currently in the choose state. If the process is choose, the algorithm waits until it finishes. If the process has a lower number, the algorithm waits until it enters the critical section or exits it.
+
+4. Once the process has confirmed that it can enter the critical section, it executes the critical section, which in this example is a sleep(1) command.
+
+5. After completing the critical section, the process sets its number to zero, indicating that it has released the critical section.
+
+The provided code includes a global variable NUM_THREADS, which sets the number of threads/processes to create and a DEFAULT_NUM_RUNS variable, which sets the number of times each thread should execute the algorithm. The main thread creates the required number of threads and starts them. The code ensures that all threads complete before terminating.
+
+
