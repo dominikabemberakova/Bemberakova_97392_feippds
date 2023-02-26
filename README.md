@@ -60,6 +60,14 @@ def bakery_algorithm(tid: int):
         while (number[j] != 0) and ((number[j], j) < (number[tid], tid)):
             pass
 
+    # critical section
+    # print(f"Thread {tid} is entering the critical section.")
+    sleep(1)
+    print(f"Thread {tid} is leaving the critical section.")
+
+    # release order of process
+    number[tid] = 0
+
 ```
 
 The algorithm uses two shared data structures: choose and number. The choose list is used to indicate whether a process is interested in entering the critical section, and the number list is used to store the unique numbers assigned to each process. The algorithm works as follows:
