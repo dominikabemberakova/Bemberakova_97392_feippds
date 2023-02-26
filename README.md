@@ -11,11 +11,11 @@ This code implements the Bakery algorithm for mutual exclusion problem. The mutu
 Your task for the first assignment is to implement the Bakery algorithm. Create a branch named "01" in your repository to work on this task. The source code must be compatible with Python 3.10 and use threads from the fei.ppds library.
 
 The source code must:
+1. include a module header with a description of the module, author name, and license
+2. be well documented: each function (or class and its methods) must have a docstring in accordance with PEP 257
+3. be commented to a reasonable extent. Comments should only be placed where necessary for understanding the context.
+4. be in accordance with PEP 8
 
-include a module header with a description of the module, author name, and license
-be well documented: each function (or class and its methods) must have a docstring in accordance with PEP 257
-be commented to a reasonable extent. Comments should only be placed where necessary for understanding the context.
-be in accordance with PEP 8
 Documentation should be written in the README.md file in the 01 branch (not in the README.md file in the master/main branch). In the documentation, formulate the problem you are solving, how your code should be executed, etc. (i.e. all the information that a person who randomly discovers your source code on the Internet would need).
 
 Furthermore, provide an explanation in the documentation of why the Bakery algorithm is a correct solution to the mutual exclusion problem (see the necessary conditions from the presentation from the exercise). You can choose either English or Slovak as the language of the documentation. Write the docstrings or module header in the chosen language as well.
