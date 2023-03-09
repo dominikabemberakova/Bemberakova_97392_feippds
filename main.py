@@ -119,14 +119,18 @@ def customer(i, shared):
 
 
 def barber(shared):
-    # TODO: Function barber represents barber. Barber is sleeping.
-    # TODO: When customer come to get new hair wakes up barber.
-    # TODO: Barber cuts customer hair and both wait to complete their work.
-
+    """Represents a barber thread"""
     while True:
-        # TODO: Rendezvous 1
+        # Wait for a customer to signal that they are waiting
+        shared.customer.wait()
+        # Invite the customer for a haircut
+        shared.barber.signal()
+        # Cut the customer's hair
         cut_hair()
-        # TODO: Rendezvous 2
+        # Signal that the barber is done cutting hair
+        shared.barber_done.signal()
+        # Wait for the customer to finish getting a haircut
+        shared.customer_done.wait()
 
 
 def main():
