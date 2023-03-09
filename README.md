@@ -28,6 +28,8 @@ Note that your output does not have to be the same, and therefore, you can give 
 
 
 # Problem solution:
+The "Barber Shop" problem is a concurrency problem and it was described at the lecture together with the solution. For a reference see [The Little Book of Semaphores](https://greenteapress.com/wp/semaphores/)
+
 The Barber Shop Problem is a classic synchronization problem, which involves a barber who cuts the hair of his customers in a barber shop. The barber shop has a waiting room with N chairs, where customers can wait for their turn. When there are no customers in the waiting room, the barber takes a nap. When a customer arrives, they take a seat in the waiting room. If there are no available chairs, the customer leaves and tries again later. When the barber wakes up, he invites the next customer in the waiting room for a haircut. After the haircut, the customer leaves the shop, and the barber goes back to sleep if there are no more customers waiting.
 
 The Barber Shop Problem with Preemption extends the original problem by allowing the barber to be interrupted during a haircut. This means that if a new customer arrives while the barber is cutting the hair of another customer, the barber stops cutting and starts serving the new customer. After the new customer is done, the barber returns to the previous customer and continues cutting their hair.
