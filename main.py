@@ -28,7 +28,7 @@ class Shared(object):
         Semaphores are used to signal the barber and the customers.
         """
 
-        # TODO : Initialize patterns we need and variables
+
         self.mutex = Mutex()
         self.waiting_room = 0
         # Initialize rendezvous variables
@@ -143,8 +143,6 @@ def main():
 
     for t in customers + [hair_stylist]:
         t.join()
-
-# TODO: Global variables C = 5 numOfCustomers N = 3 sizeOfWaitingRoom
 
 
 if __name__ == "__main__":
