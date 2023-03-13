@@ -53,15 +53,20 @@ def philosopher(i: int, shared: Shared):
     """
     for _ in range(NUM_RUNS):
         think(i)
+        # get token
+        shared.token_mutex.lock()
+        while shared.token_holder != i:
+            shared.token_mutex.unlock()
+            sleep(0.1)
+            shared.token_mutex.lock()
         # get forks
-        shared.waiter.wait()
         shared.forks[i].lock()
-        sleep(0.5)
         shared.forks[(i+1) % NUM_PHILOSOPHERS].lock()
+        shared.token_holder = (i + 1) % NUM_PHILOSOPHERS
+        shared.token_mutex.unlock()
         eat(i)
         shared.forks[i].unlock()
         shared.forks[(i + 1) % NUM_PHILOSOPHERS].unlock()
-        shared.waiter.signal()
 
 
 def main():
