@@ -20,7 +20,8 @@ class Shared:
     def __init__(self):
         """Initialize an instance of Shared."""
         self.forks = [Mutex() for _ in range(NUM_PHILOSOPHERS)]
-        self.waiter: Semaphore = Semaphore(NUM_PHILOSOPHERS - 1)
+        self.token_holder: int = 0
+        self.token_mutex: Mutex = Mutex()
 
 
 def think(i: int):
