@@ -65,3 +65,23 @@ class SimpleBarrier(object):
         self.mutex.unlock()
         self.barrier.wait()
         return is_last
+
+class Shared(object):
+    """
+    Shared object containing all synchronization mechanisms, and it also
+    represents the pot for servings. Param servings server for that.
+    empty_pot and full_pot semaphores are to signal related events.
+    Barriers are to ensure a proper synchronization in savages and
+    cooks processes.
+    """
+
+    def __init__(self):
+        self.servings = 0
+        self.mutex = Mutex()
+        self.empty_pot = Semaphore(0)
+        self.full_pot = Semaphore(0)
+
+        self.barrier1 = SimpleBarrier(SAVAGES)
+        self.barrier2 = SimpleBarrier(SAVAGES)
+
+        self.barrier3 = SimpleBarrier(COOKS)
