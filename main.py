@@ -138,3 +138,42 @@ def cook(shared, i):
         if is_last:
             put_servings_in_pot(shared, i)
             shared.full_pot.signal()
+
+def savage(shared, i):
+    """
+    Simulate the process of a savages, which includes trying to get
+    a portion from a pot. If the pot is empty, the savage wakes all
+    the cooks and waits for a pot to be refilled. If the pot is full,
+    savage takes a portion for himself and eats it.
+    Args:
+        shared(Shared): shared object with sync mechanisms.
+        i(int): id of savage
+    """
+    sleep(randint(0, 100) / 100)
+
+    while True:
+        shared.barrier2.wait(last=f"savage {i}: all of us are here, let's have dinner")
+        shared.mutex.lock()
+        print(f"savage {i}: num of servings in pot is {shared.servings}")
+        if shared.servings == 0:
+            print(f"savage {i}: wakes all cooks")
+            shared.empty_pot.signal(COOKS)
+            shared.full_pot.wait()
+        get_serving_from_pot(shared, i)
+        shared.mutex.unlock()
+        eat(i)
+        shared.barrier1.wait(last=" ")
+
+
+def main():
+    shared = Shared()
+
+    savages = [Thread(savage, shared, i) for i in range(SAVAGES)]
+    cooks = [Thread(cook, shared, i) for i in range(COOKS)]
+
+    for t in savages + cooks:
+        t.join()
+
+
+if __name__ == "__main__":
+    main()
