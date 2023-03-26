@@ -85,3 +85,12 @@ class Shared(object):
         self.barrier2 = SimpleBarrier(SAVAGES)
 
         self.barrier3 = SimpleBarrier(COOKS)
+
+def eat(i):
+    """
+    Simulate eating by sleep.
+    Args:
+        i(int): id of savage that eats
+    """
+    print(f"savage {i}: feasting")
+    sleep(randint(20, 50) / 100)
