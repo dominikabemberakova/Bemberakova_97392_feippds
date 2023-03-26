@@ -116,3 +116,25 @@ def put_servings_in_pot(shared, i):
     """
     print(f"cook {i}: all cooked, servings to pot")
     shared.servings += SERVINGS
+
+
+
+def cook(shared, i):
+    """
+    Simulate the process of a cook, which includes waiting for pot
+    to be empty, then cooking all portions, and adding mentioned portions
+    to the pot. After that, the last cook signals that the pot is full.
+    Args:
+        shared(Shared): shared object with sync mechanisms.
+        i(int): id of cook
+    """
+    while True:
+        shared.empty_pot.wait()
+
+        print(f"cook {i}: cooking")
+        sleep(randint(50, 80) / 100)
+
+        is_last = shared.barrier3.wait()
+        if is_last:
+            put_servings_in_pot(shared, i)
+            shared.full_pot.signal()
