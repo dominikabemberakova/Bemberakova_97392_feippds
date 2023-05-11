@@ -3,8 +3,10 @@
 [![License](https://img.shields.io/npm/l/@tandil/diffparse?color=%23007ec6)](https://github.com/dominikabemberakova/Bemberakova_97392_feippds/blob/main/LICENSE)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-blue.svg)](https://conventionalcommits.org)
 
+[OpenAI (2021) "ChatGPT (GPT-3.5)"](https://chat.openai.com/)
+
 # Assignment
-Submission deadline: May 12, 2023, 23:59:59.998
+Submission deadline: May 12, 2023, 23:59:59
 5 points
 Instructions:
 1. Load an image in jpg format, convert it to grayscale using GPU and save it to a new file.
