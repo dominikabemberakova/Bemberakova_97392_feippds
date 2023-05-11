@@ -84,25 +84,25 @@ if __name__ == '__main__':
 
     input_image = Image.open("img3.jpg")
     # Define the desired resolution
-    new_width = 1080
-    new_height = 1080
+    new_width = 270
+    new_height = 350
 
     resized_image = input_image.resize((new_width, new_height))  # Resize the image
 
     start_gpu_time = time.time()  # Start the timer for GPU
     output_gpu = grayscale_on_gpu(resized_image)  # Convert the image to grayscale by using GPU
     output_gpu = Image.fromarray(output_gpu)
-    output_gpu.save("output_gpu.jpg")  # Save the grayscale image to a file
+    output_gpu.save("output3_gpu.jpg")  # Save the grayscale image to a file
     elapsed_gpu_time = time.time() - start_gpu_time  # Calculate the elapsed time for GPU
 
     start_cpu_time = time.time()  # Start the timer for CPU
     output_cpu = grayscale_on_cpu(resized_image)  # Convert the image to grayscale by using CPU
     output_cpu = Image.fromarray(output_cpu)
-    output_cpu.save("output_cpu.jpg")  # Save the grayscale image to a file
+    output_cpu.save("output3_cpu.jpg")  # Save the grayscale image to a file
     elapsed_cpu_time = time.time() - start_cpu_time  # Calculate the elapsed time for CPU
 
-    print(f"Grayscale image saved successfully! GPU Time elapsed: {elapsed_gpu_time:.4f} seconds")
-    print(f"Grayscale image saved successfully! CPU Time elapsed: {elapsed_cpu_time:.4f} seconds")
+    print(f"Grayscale image3 saved successfully! GPU Time elapsed: {elapsed_gpu_time:.4f} seconds")
+    print(f"Grayscale image3 saved successfully! CPU Time elapsed: {elapsed_cpu_time:.4f} seconds")
 
     # Display the input and output images
     resized_image.show()
